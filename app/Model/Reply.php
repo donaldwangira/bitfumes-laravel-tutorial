@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    protected $guarded = [];
     public function question (){
         return $this->belongsTo(Question::class);
     }
@@ -15,5 +16,9 @@ class Reply extends Model
     }
     public function like(){
         return $this->hasMany(Like::class);
+    }
+    public function getPathAttribute(){
+        $slug = $this->question->slug;
+        return asset("api/question/$slug/reply/$this->id");
     }
 }
