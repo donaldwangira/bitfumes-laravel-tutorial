@@ -11,6 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 class ReplyController extends Controller
 {
     /**
+     * Limit access to resources usin middleware
+     */
+    public function __construct()
+    {
+        $this->middleware('JWT', ['except' => ['index', 'show']]);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

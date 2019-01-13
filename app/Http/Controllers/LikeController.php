@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class LikeController extends Controller
 {
+    /**
+     * Limit access to resources usin middleware
+     */
+    public function __construct()
+    {
+        $this->middleware('JWT');
+    }
     function likeIt(Reply $reply){
         $reply->like()->create(['user_id' => '1']);
     }
